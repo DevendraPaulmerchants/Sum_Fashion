@@ -1,0 +1,24 @@
+.women_fashion_parent {
+    padding: 2rem 4rem;
+}
+.women_fashion_title_and_search_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+}
+.women_search_container {
+  display: flex;
+  gap: 10px;
+  height: fit-content;
+  border: 1px solid #D5D5D5;
+  padding: 5px 15px;
+  align-items: center;
+  border-radius: 8px;
+}
+.women_search_container input {
+  border: none;
+  outline: none;
+}
+.women_card_container_parent {
+    padding: 2rem 0;
+}

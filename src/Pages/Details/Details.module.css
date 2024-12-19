@@ -1,0 +1,89 @@
+.dress_details_top_container {
+    padding: 1rem 4rem;
+    display: flex;
+    gap: 4rem;
+}
+.dress_images_container_parent {
+    width: 40%;
+}
+.dress_image_container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.dress_image_container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.dress_details_back_arrow {
+    position: absolute;
+    margin-left: 12px;
+    cursor: pointer;
+}
+.dress_details_forward_arrow {
+    position: relative;
+    margin-left: -30px;
+    cursor: pointer;
+}
+.dress_details_container {
+    padding-right: 4rem;
+    width: 60%;
+}
+.dress_details_dress_name {
+    color: #353535;
+    font-size: 24px;
+    font-weight: 500;
+}
+.dress_details_dress_category {
+    /* color: #353535; */
+    color: rgb(53, 53, 53,0.5);
+    font-size: 12px;
+    font-weight: 400;
+}
+.dress_details_dress_price_and_btn {
+    display: flex;
+    padding: 1rem 0;
+    gap: 2rem;
+}
+.dress_details_dress_price {
+    width: 30%;
+}
+.dress_details_dress_price_btn {
+    width: 70%;
+}
+.dress_details_dress_price_btn button {
+    background: #0085D0;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 5px 15px;
+    width: 100%;
+    cursor: pointer;
+}
+.dress_details_description {
+    color: #353535;
+    font-size: 18px;
+    font-weight: 500;
+}
+.dress_details_more_dress_parent {
+    margin-top: 2rem;
+}
+.dress_details_more_dress {
+    /* margin-top: 2rem; */
+}
+.dress_details_more_dress h2 {
+    color: #484848;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+.dress_details_more_dress p {
+   text-align: center;
+}
+.dress_details_more_dress_card_parent {
+    padding:2rem 4rem;
+}

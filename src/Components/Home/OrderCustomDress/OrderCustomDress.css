@@ -1,0 +1,11 @@
+#custom-dress-button {
+    padding: 10px;
+    min-width: 200px;
+    box-shadow: 0 0 10px rgb(38, 38, 38,0.5);
+}
+@media screen and (max-width:1200px) {
+    #custom-dress-button {
+        padding: 10px 0;
+        min-width: 150px;
+    }
+}

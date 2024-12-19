@@ -1,0 +1,34 @@
+#user_icon {
+    background: none;
+}
+.ReactModalPortal .ReactModal__Overlay .ReactModal__Overlay--after-open {
+  background-color: #00081d99 !important;
+}
+.userIcon_name_mobile_number {
+    display: flex;
+    gap: 2rem;
+    background: rgb(222, 222, 222, 0.3);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+}
+.userIcon_name_mobile_number h2 {
+    color: #00113E;
+    font-weight: 500;
+    font-size: 24px;
+}
+.userIcon_name_mobile_number h3 {
+    color: #6C6A6A;
+    font-weight: 400;
+    font-size: 20px;
+}
+.previous_order_icon_and_text {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 2rem 10px;
+    border-bottom: 1.5px solid #29345D;
+}
+.previous_order_text h4 {
+    color: #00113E;
+    font-size: 20px;
+    font-weight: 500;
+}

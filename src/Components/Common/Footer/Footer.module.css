@@ -1,0 +1,35 @@
+.footer_parent {
+    padding: 0 4rem;
+    margin: 1rem 0 4rem 0;
+}
+.footer_logo_and_links {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.footer_logo_container {
+    width: 150px;
+    height: 50%;
+}
+.footer_logo_container img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+.footer_links_container {
+    display: flex;
+    gap: 3rem;
+}
+.footer_links_container a {
+    text-decoration: none;
+    color: #484848;
+    font-size: 16px;
+}
+.footer_copyright_container {
+    text-align: center;
+    margin-top: 2rem;
+}
+.footer_copyright_container p {
+    color: #484848;
+    font-size: 14px;
+}
