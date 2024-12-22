@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
+import { useMask } from "@react-input/mask";
 import style from '../Component.module.css';
 import VerifyOTP from './VerifyOTP';
 import { useCart } from '../Context/Context';
@@ -7,42 +8,32 @@ import { handleMobileNumberChange } from '../../DataValidation/DataValidation';
 
 function LogIn({ close }) {
     // document.body.style.overflow='hidden';
-    const {isLogIn, setIsLogIn}=useCart();
-    // console.log(isLogIn);
+    const { isLogIn, setIsLogIn } = useCart();
     const [getOTPPageOpen, setGetOTPPageOpen] = useState(false);
     const [mobileNumber, setMobileNumber] = useState("");
-    // const handleMobileNumberChange = (e) => {
-    //     const mobile = e.target.value;
-    //     if (mobile.length > 10) {
-    //         alert("Mobile number should not exceed 10 digits.");
-    //         return;
-    //     }
-    //     if (!/^\d*$/.test(mobile)) {
-    //         alert("Please enter numbers only.");
-    //         return;
-    //     }
-    //     setMobileNumber(mobile);
-    // };
-    
+    useEffect(()=>{
+        const el=document.querySelector("#mobileInput");
+        el.focus();
+    },[])
+    const inputRef = useMask({
+        mask: "+91 ___ -___-__-__",
+        replacement: { _: /\d/ },
+    });
     const closeOTPPage = () => {
         setGetOTPPageOpen(false);
         close();
     }
     const handlleGetOtp = () => {
-       const confirm= window.confirm("are yousure");
-        if(confirm){
-
-        }
-        else {
-            
-        }
-        if(mobileNumber.length < 10){
-            alert("Please check Mobile number");
+        console.log(mobileNumber.length);
+        if(mobileNumber.length < 18){
+            alert("Please Check Mobile Number..");
             return;
         }
-        else {
+        const confirm = window.confirm(`Are you sure to continue with: ${mobileNumber}`);
+        if (confirm) {
             setGetOTPPageOpen(true);
         }
+
     }
     return <>
         <div className={style.login_page_parent_container}>
@@ -59,12 +50,21 @@ function LogIn({ close }) {
                             handlleGetOtp();
                         }}>
                             <label>Enter Mobile Number</label>
-                            <input type="number"
+                            {/* <input type="number"
                                 value={mobileNumber}
                                 onChange={(e)=>handleMobileNumberChange(e,setMobileNumber)}
                                 className={style.login_page_left_container_input}
                                 placeholder="+91-1234567890"
-                                required />
+                                required /> */}
+                            <input
+                                id="mobileInput" required
+                                className={style.login_page_left_container_input}
+                                ref={inputRef}
+                                placeholder="Enter Mobile No."
+                                value={mobileNumber}
+                                // onChange={(e) => handleMobileNumberChange(e,setMobileNumber)}
+                                onChange={(e)=> setMobileNumber(e.target.value)}
+                            />
                             <div className={style.login_page_term_and_condition}>
                                 <input type='checkbox' required />
                                 <p>I agree to all Terms & Conditions</p>

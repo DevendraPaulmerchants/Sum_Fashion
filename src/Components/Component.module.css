@@ -229,7 +229,22 @@
     width: 100%;
     object-fit: cover;
 }
-
+.card_orderId_and_status {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 0;
+    margin-bottom: -10px;
+}
+.card_orderId_and_status_p {
+    color: #6D6A6A;
+    font-size: 14px;
+}
+.card_order_status {
+    color: #003AD0;
+    background: #E4ECFF;
+   border-radius: 10px;
+   padding:2px 5px;
+}
 .card_title {
     font-size: 24px;
     color: #484848;
@@ -563,4 +578,148 @@
 }
 .upload_img_and_btn {
     width: 100%;
+}
+/* ------------------------ Saved Address Page --------------------------- */
+.saved_address_parent {
+    padding: 1rem 4rem;
+}
+.saved_address_parent h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+.saved_address_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.saved_address_card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 4rem);
+    box-shadow: 0 0 10px rgb(38, 38, 38, 0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+.saved_address_card h3 {
+    color: #484848;
+    font-weight: 500;
+    font-size: 20px;
+}
+.saved_address_card h4 {
+    color: #6C6A6A;
+    font-weight: 500;
+    font-size: 16px;
+}
+.address_and_button {
+    display: flex;
+    gap: 2rem;
+}
+.address_and_button p {
+    color: #6C6A6A;
+    font-size: 14px;
+}
+.saved_address_btn_container {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+}
+.saved_address_btn_container button {
+    border-radius: 10px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    height: fit-content;
+}
+.saved_address_btn_container_delete_btn {
+    border:1px solid #0085D0;
+    background: none;
+    color: #0085D0;
+    padding: 5px 20px;
+    
+}
+.saved_address_btn_container_edit_btn {
+    background: #0085D0;
+    padding: 6px 30px;
+    border: none;
+    color: #fff;
+}
+/* ---------------------------- Previous Order------------- */
+.previous_order_parent {
+    padding: 1rem 4rem;
+}
+.Previous_order_header_h2 {
+  margin-bottom: 1rem;
+  font-size: 24px;
+  font-weight: 500;
+}
+/*-------------------- Previous Order Details ---------------- */
+.order_details_image_and_details {
+    display: flex;
+    gap: 4rem;
+    padding: 0 2rem;
+}
+.order_details_image_container {
+   width: 40%;
+   overflow: hidden;
+   border-radius: 10px;
+}
+.order_details_image_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.order_details_details {
+  width: 60%;
+}
+.dress_details_title_description {
+    padding-top: 1rem;
+}
+.dress_details_title_description h2 {
+    color:#484848;
+    font-weight: 500;
+    font-size: 24px;
+}
+.dress_details_title_description p {
+    color: #606060;
+    font-size: 14px;
+    font-weight: 14px;
+}
+.customer_name_and_mobile_number {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+.customer_name_and_mobile_number p {
+    color: #6D6A6A;
+}
+.customer_name_and_mobile_number span {
+    color:#00113E;
+}
+/* -------------------- FAQ Page CSS ---------------- */
+.faq_container {
+    padding: 1rem 4rem;
+}
+.faq_questions_container {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 10px rgb(38, 38, 38, 0.5);
+    padding: 10px 2rem;
+    border-radius: 10px;
+}
+.faq_questions_container h2 {
+  font-size: 20px;
+  color: #484848;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} 
+.faq_questions_container p {
+    color: #6C6A6A;
+    font-size: 14px;
+}
+.hidden {
+    display: none;
 }

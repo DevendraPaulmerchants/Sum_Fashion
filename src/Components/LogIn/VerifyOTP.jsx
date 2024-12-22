@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import style from '../Component.module.css';
 import "./VerifyOtp.css";
@@ -8,6 +8,10 @@ import { useCart } from '../Context/Context';
 function VerifyOTP({ closeOtp,mobileNumber }) {
     const {setIsLogIn}=useCart();
     const [otp, setOTP] = useState("");
+    useEffect(()=>{
+        const VOTP=document.querySelector("#react_otp");
+        VOTP.focus();
+    })
     const handleOTP=(e)=>{
         e.preventDefault();
         if(otp === "8888"){

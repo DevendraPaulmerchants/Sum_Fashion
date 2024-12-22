@@ -12,7 +12,7 @@ function Footer() {
             <div className={style.footer_links_container}>
                 <Link to="/women-fashion">Women Fashion</Link>
                 <Link>Blog</Link>
-                <Link>FAQ,s</Link>
+                <Link to="/FAQ">FAQ,s</Link>
                 <Link>Support Center</Link>
             </div>
         </div>
