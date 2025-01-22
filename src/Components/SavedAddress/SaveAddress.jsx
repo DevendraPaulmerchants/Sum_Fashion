@@ -51,7 +51,7 @@ function SaveAddress() {
                 })}
             </div>
         </div>
-        {editAddress && <AddDetails close={closeAddressEditPage}/>}
+        {editAddress && <AddDetails close={closeAddressEditPage} custom="false"/>}
     </>
 }
 

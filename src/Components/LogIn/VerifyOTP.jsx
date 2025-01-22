@@ -11,7 +11,7 @@ function VerifyOTP({ closeOtp,mobileNumber }) {
     useEffect(()=>{
         const VOTP=document.querySelector("#react_otp");
         VOTP.focus();
-    })
+    },[])
     const handleOTP=(e)=>{
         e.preventDefault();
         if(otp === "8888"){

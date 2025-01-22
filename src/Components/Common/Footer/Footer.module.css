@@ -33,3 +33,8 @@
     color: #484848;
     font-size: 14px;
 }
+@media screen and (max-width:1200px){
+    .footer_parent {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,26 @@
+.instagram_page_container {
+    text-align: center;
+    padding: 2rem 0;
+}
+.instagram_image_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    margin-top: 15px;
+    width: 100%;
+}
+.instagram_image_15_percent {
+    width: 15.5%;
+    height: 308px;
+}
+.instagram_image_12_percent {
+    width: 12.5%;
+    height: 380px;
+}
+.instagram_image_15_percent img ,.instagram_image_12_percent img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}

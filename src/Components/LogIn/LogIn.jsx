@@ -1,40 +1,80 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { useMask } from "@react-input/mask";
 import style from '../Component.module.css';
 import VerifyOTP from './VerifyOTP';
 import { useCart } from '../Context/Context';
 import { handleMobileNumberChange } from '../../DataValidation/DataValidation';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import { auth } from '../Firebase/auth';
 
 function LogIn({ close }) {
-    // document.body.style.overflow='hidden';
     const { isLogIn, setIsLogIn } = useCart();
     const [getOTPPageOpen, setGetOTPPageOpen] = useState(false);
     const [mobileNumber, setMobileNumber] = useState("");
-    useEffect(()=>{
-        const el=document.querySelector("#mobileInput");
+
+    useEffect(() => {
+        const el = document.querySelector("#mobileInput");
         el.focus();
-    },[])
+    }, [])
     const inputRef = useMask({
-        mask: "+91 ___ -___-__-__",
+        mask: "+91__________",
         replacement: { _: /\d/ },
     });
+
     const closeOTPPage = () => {
         setGetOTPPageOpen(false);
         close();
     }
-    const handlleGetOtp = () => {
-        console.log(mobileNumber.length);
-        if(mobileNumber.length < 18){
-            alert("Please Check Mobile Number..");
-            return;
-        }
-        const confirm = window.confirm(`Are you sure to continue with: ${mobileNumber}`);
-        if (confirm) {
-            setGetOTPPageOpen(true);
-        }
+    // ----------------- First Approach ------------------
+    // const sendO(tp = async () => {
+    //     try {
+    //         if (!window.recaptchaVerifier) {
+    //             window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha', {
+    //                 size: 'normal', 
+    //                 callback: (response) => {
+    //                     console.log("Recaptcha solved:", response);
+    //                 },
+    //                 'expired-callback': () => {
+    //                     console.warn("Recaptcha expired. Please try again.");
+    //                 },
+    //             });
+    //         }
+    //         console.log(mobileNumber)
+    //         const appVerifier = window.recaptchaVerifier;
+    //         console.log("captcha verified:",appVerifier);
+    //         const confirmation = await signInWithPhoneNumber(auth, mobileNumber, appVerifier);
+    //         console.log("OTP sent:", confirmation);
+    //         window.confirmationResult = confirmation;
+    //     } catch (err) {
+    //         console.error("Error sending OTP:", err);
+    //     }
+    // };
+// ------------------- Second Approach ----------------------------
+//    const [verificationId,setVerificationId]=useState("");
+//    const recaptchaRef=useRef(null);
+//     const sendOtp=()=>{
+//         if(recaptchaRef.current){
+//             recaptchaRef.current.InnerHtml='<div id="recaptcha"></div>'
+//         }
+//        const verifier=new RecaptchaVerifier("recaptcha",{
+//         size:"invisible",
+//        })
+//         signInWithPhoneNumber(mobileNumber,verifier)
+//        .then(confirmationResult=>{
+//         setVerificationId(confirmationResult.verificationId)
+//        })
+//        .catch(error=>{
+//         console.error("Error Sending OTP:- ",error)
+//        })
+//    }
 
-    }
+// ------------------- Third Approach --------------------------
+ const sendOtp=()=>{
+    console.log(mobileNumber);
+    setIsLogIn(true);
+    setGetOTPPageOpen(true);
+ }
     return <>
         <div className={style.login_page_parent_container}>
             <div className={style.login_page_parent}>
@@ -45,31 +85,28 @@ function LogIn({ close }) {
                 <div className={style.login_page_left_and_right_container}>
                     <div className={style.login_page_left_container}>
                         <p>Find your favorite style and get it custom tailored</p>
-                        <form onSubmit={(e) => {
-                            e.preventDefault();
-                            handlleGetOtp();
-                        }}>
+                        <form onSubmit={(e) => {e.preventDefault();sendOtp()}}>
                             <label>Enter Mobile Number</label>
-                            {/* <input type="number"
-                                value={mobileNumber}
-                                onChange={(e)=>handleMobileNumberChange(e,setMobileNumber)}
-                                className={style.login_page_left_container_input}
-                                placeholder="+91-1234567890"
-                                required /> */}
                             <input
                                 id="mobileInput" required
                                 className={style.login_page_left_container_input}
                                 ref={inputRef}
                                 placeholder="Enter Mobile No."
                                 value={mobileNumber}
-                                // onChange={(e) => handleMobileNumberChange(e,setMobileNumber)}
-                                onChange={(e)=> setMobileNumber(e.target.value)}
+                                // onChange={(e)=> handleMobileChange(e)}
+                                onChange={(e) => setMobileNumber(e.target.value)}
                             />
                             <div className={style.login_page_term_and_condition}>
                                 <input type='checkbox' required />
                                 <p>I agree to all Terms & Conditions</p>
                             </div>
-                            <button className={style.login_page_btn}>Get OTP</button>
+                            {/* <div id='recaptcha' style={{ marginTop: '1rem' }}></div> */}
+                            {/* <div ref={recaptchaRef}></div> */}
+                            {/* {!captchVerified && <button className={style.login_page_btn} onClick={verifyMobileNumber} >Validate</button>} */}
+                            {/* {captchVerified && <button className={style.login_page_btn} onClick={sendOtp} >Get OTP</button>} */}
+                            <button className={style.login_page_btn} >Get OTP</button>
+                            {/* <input type='number' value={otp} onChange={(e)=>setOtp(e.target.value)}/> */}
+                            {/* <button onClick={verifyOtp}>verify Otp</button> */}
                         </form>
                     </div>
                     <div className={style.login_page_right_container}>
@@ -82,4 +119,4 @@ function LogIn({ close }) {
     </>
 }
 
-export default LogIn;
+export default LogIn; 

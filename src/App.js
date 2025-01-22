@@ -23,7 +23,7 @@ function App() {
           <Route path='/women-fashion' element={<WomenFashion />} />
           <Route path='/mens-fashion' element={<MensFashion />} />
           <Route path="/add-details" element={<AddDetails/>}/>
-          <Route path="/details/:Id" element={<Details/>}/>
+          <Route path="/details/:id" element={<Details/>}/>
           <Route path="/address" element={<SaveAddress/>}/>
           <Route path="/previous_order" element={<PreviousOrder/>}/>
           <Route path="/FAQ" element={<FAQ/>}/>

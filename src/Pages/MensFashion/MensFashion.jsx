@@ -3,74 +3,19 @@ import { RiSearch2Line } from "react-icons/ri";
 import style1 from "../WomenFashion/WomenFashion.module.css";
 import style from '../../Components/Component.module.css';
 import WomenFashionCard from '../../Components/Home/WomenFashionCard/WomenFashionCard';
-const cardMensContent = [
-    {
-        Id:1,
-        Title: "Shiny Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:2,
-        Title: "Shiny Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:3,
-        Title: "Deepak Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:4,
-        Title: "Shiny Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:5,
-        Title: "Shiny Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:6,
-        Title: "Devendra Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:7,
-        Title: "Shiny Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-    {
-        Id:8,
-        Title: "Vikas Blazer",
-        Description: "Made from premium fabrics that exude luxury , such as fine wool, soft cashmere, or smooth silk blends, the blazer not only radiates elegance but also ensures comfort and durability.",
-        Price: 1200,
-        Image: "MensBlazer1.svg"
-    },
-]
+import { useCart } from '../../Components/Context/Context';
+
 function MensFashion() {
+    const {dress} =useCart();
     const [dressName, setDressName] = useState("");
     const handleDressNameChange = (e) => {
         const inputValue = e.target.value.trim().toLowerCase();
         setDressName(inputValue);
     };
-    const filteredCard = cardMensContent?.filter((dress) =>
-        dress.Title.toLowerCase().includes(dressName)
+    const filteredCard = dress?.filter((dress) =>
+        dress.dressName?.toLowerCase().includes(dressName)
     );
-    const cardAfterFilter = filteredCard?.length > 0 ? filteredCard : cardMensContent;
+    const cardAfterFilter = filteredCard?.length > 0 ? filteredCard : dress;
     return (
         <div className={style1.women_fashion_parent}>
             <div className={style1.women_fashion_title_and_search_container}>

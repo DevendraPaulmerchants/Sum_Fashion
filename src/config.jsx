@@ -1,0 +1,1 @@
+export const APIPATH="https://www.sumfashion.in";

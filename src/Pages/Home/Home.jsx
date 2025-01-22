@@ -4,6 +4,7 @@ import NewArrival from '../../Components/Home/NewArrival/NewArrival'
 import OrderCustomDress from '../../Components/Home/OrderCustomDress/OrderCustomDress';
 import CustomerFeedback from '../../Components/Home/CustomerFeedback/CustomerFeedback';
 import Footer from '../../Components/Common/Footer/Footer';
+import Instagram from '../../Components/Home/Instagram/Instagram';
 
 function Home() {
   return <>
@@ -11,6 +12,7 @@ function Home() {
      <NewArrival/>
      <OrderCustomDress/>
      <CustomerFeedback/>
+     <Instagram/>
   </>
 }
 

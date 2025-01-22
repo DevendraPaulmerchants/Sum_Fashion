@@ -5,39 +5,46 @@ import { handleInputChangeWithAlphabetAndNumber, handleInputChangeWithAlphabetOn
 import { useCart } from '../Context/Context';
 import { useMask } from "@react-input/mask";
 
-function AddDetails({ close }) {
+function AddDetails({ close,custom }) {
     const { editedAddress, setEditedAddress } = useCart();
-    const custom = false;
-    const [customerName, setCustomerName] = useState(editedAddress.name || "");
-    const [CustomerMobileNo, setCustomerMobileNo] = useState(editedAddress.mobileNo || "");
+    // const custom = false;
+    console.log(custom)
+    const [customerName, setCustomerName] = useState(editedAddress?.name || "");
+    const [CustomerMobileNo, setCustomerMobileNo] = useState(editedAddress?.mobileNo || "");
     const [CustomerAltMobileNo, setCustomerAltMobileNo] = useState("");
-    const [CustomerAddress, setCustomerAddress] = useState(editedAddress.add || "");
+    const [CustomerAddress, setCustomerAddress] = useState(editedAddress?.add || "");
+    const [isConfirm,setIsConfirm]=useState(false);
     useEffect(() => {
         const el = document.querySelector("#customerName");
-        el.focus();
+        el?.focus();
     },[])
     const inputRef = useMask({
-        mask: "+91 ___ -___-__-__",
+        mask: "+91__________",
         replacement: { _: /\d/ },
     });
+    const handleAddressConfirm=()=>{
+        if(CustomerAltMobileNo){
+            setIsConfirm(true);
+        }
+    }
     return (
         <div className={style.login_page_parent_container}>
             <div className={style.add_details_container}>
                 <div className={style.login_page_header}>
-                    {(custom && !editedAddress) && <h2 className={style.login_page_header_title}><span className={style.blue_span}> Custom</span> Dress</h2>}
-                    {(!custom && !editedAddress) && <h2 className={style.login_page_header_title}>Add<span className={style.blue_span}> Details</span></h2>}
+                    {(custom === "true" && !editedAddress) && <h2 className={style.login_page_header_title}><span className={style.blue_span}> Custom</span> Dress</h2>}
+                    {(custom === "false" && !editedAddress) && <h2 className={style.login_page_header_title}>Add<span className={style.blue_span}> Details</span></h2>}
                     {editedAddress && <h2 className={style.login_page_header_title}>Edit<span className={style.blue_span}> Details</span></h2>}
                     <h2 className={style.login_page_close_btn} onClick={close}><IoMdClose /></h2>
                 </div>
-                <form>
+                <form onSubmit={(e)=>e.preventDefault()}>
                     <div className={style.input_container_parent}>
-                        {!custom &&
+                        {custom === "false" &&
                             <div className={style.input_container_with_label}>
                                 <label>Name</label>
                                 <input id='customerName' type='text' placeholder='Devendra Kumar' value={customerName} minLength={3} maxLength={50}
                                     onChange={(e) => handleInputChangeWithAlphabetOnly(e, setCustomerName)} />
                             </div>}
-                        {!custom &&
+                        {custom === "false" &&
                             <div className={style.input_container_with_label}>
                                 <label>Phone Number</label>
                                 {/* <input type='tel' placeholder='+918887766767' value={CustomerMobileNo}
@@ -77,26 +84,24 @@ function AddDetails({ close }) {
                             <input type='file' />
                         </div> */}
                     </div>
-                    {!custom && <p className={style.note_details_p_16}>** Note: Only ₹ 100 will be charged now as the  measurements will be taken at you doorstep.</p>}
+                    {custom === "false" && <p className={style.note_details_p_16}>** Note: Only ₹ 100 will be charged now as the  measurements will be taken at you doorstep.</p>}
                     <div className={style.upload_image_btn_and_img_container}>
                         <div className={style.upload_img_and_btn}>
-                            {custom &&
+                            {custom === "true" &&
                                 <div className={style.input_container_with_label}>
                                     <label>Upload Images</label>
                                     <input type='file' />
                                 </div>}
 
                             <div className={style.add_details_button_container}>
-                                <button className={style.login_page_btn}>
-                                    {(custom && !editedAddress) && "Proceed  to Add Details"}
-                                    {(!custom && !editedAddress) && "Proceed  to payment"}
-                                    {editedAddress && "Confirm"}
-                                </button>
+                            {(custom ==="true" && !editedAddress) && <button className={style.login_page_btn}>Proceed  to Add Details</button>}
+                            {(custom === "false" && editedAddress && !isConfirm) && <button className={style.login_page_btn} onClick={handleAddressConfirm}>Confirm</button>}
+                            {isConfirm && <button className={style.login_page_btn}>Proceed  to payment</button>}
                             </div>
                         </div>
-                        {custom &&
+                        {custom === "true" &&
                             <div>
-                                <img src='CustomDressFormRightImage.svg' />
+                                <img src='/CustomDressFormRightImage.svg' />
                             </div>}
 
                     </div>

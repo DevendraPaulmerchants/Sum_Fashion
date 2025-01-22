@@ -1,0 +1,44 @@
+.crousel_card {
+    box-shadow: 0 0 10px rgb(38, 38, 38, 0.2);
+    width: 200px;
+    border: 1px solid #dedede;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.slick-prev, .slick-next {
+    background: rgb(110, 102, 102) !important;
+    top: -25px !important;
+}
+.slick-prev {
+    right: 40px !important;
+    left: unset !important;
+}
+.slick-next {
+    right: 10px !important;
+}
+
+.slick-slide > div {
+    margin: 0 10px;
+}
+.crousel_image {
+    height: 300px;
+}
+.crousel_image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.dress_details {
+    padding: 10px;
+}
+.dress_details h2 {
+    font-size: 20px;
+    color: #646464;
+    font-weight: 500;
+}
+.dress_details p {
+    font-size: 16px;
+    /* color: #646464; */
+    color: rgba(100, 100, 100, 0.8);
+    font-weight: 500;
+}

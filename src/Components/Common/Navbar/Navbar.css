@@ -1,8 +1,9 @@
 #user_icon {
     background: none;
 }
-.ReactModalPortal .ReactModal__Overlay .ReactModal__Overlay--after-open {
-  background-color: #00081d99 !important;
+
+.ReactModal__Overlay .ReactModal__Overlay--after-open {
+    background-color: transparent !important;
 }
 .userIcon_name_mobile_number {
     display: flex;

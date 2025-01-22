@@ -3,7 +3,8 @@ import style from "../../Components/Component.module.css";
 import { IoMdClose } from "react-icons/io";
 
 function OrderDetails({ close, selectedDress }) {
-    console.log(selectedDress);
+    console.log(selectedDress)
+
     return <>
         <div className={style.login_page_parent_container}>
             <div className={style.add_details_container}>
@@ -13,27 +14,27 @@ function OrderDetails({ close, selectedDress }) {
                 </div>
                 <div className={style.order_details_image_and_details}>
                     <div className={style.order_details_image_container}>
-                        <img src={`/${selectedDress.Image}`} alt={selectedDress.Title} />
+                        <img src={`/${selectedDress.dressImage}`} alt={selectedDress.dressName} />
                     </div>
                     <div className={style.order_details_details}>
                         <div className={style.card_orderId_and_status} style={{padding:"0"}}>
                             <div><p className={style.card_orderId_and_status_p}>Order ID: <b>{selectedDress.OrderId}</b></p></div>
-                            <div><p className={style.card_orderId_and_status_p}>Status: <b className={style.card_order_status}>{selectedDress.Status}</b></p></div>
+                            <div><p className={style.card_orderId_and_status_p}>Status: <b className={style.card_order_status}>{selectedDress.status}</b></p></div>
                         </div>
                         <div className={style.dress_details_title_description}>
-                            <h2 className={style.dress_details_dress_name}>{selectedDress.Title}</h2>
-                            <p className={style.dress_details_dress_category}>{selectedDress.Description}</p>
+                            <h2 className={style.dress_details_dress_name}>{selectedDress.dressName}</h2>
+                            <p className={style.dress_details_dress_category}>{selectedDress.desc}</p>
                         </div>
                         <div className={style.customer_name_and_mobile_number}>
-                            <p>Name: <span>Suman</span></p>
-                            <p>Phone Number : <span>+91 999999999</span></p>
+                            <p>Name: <span>{selectedDress.userName}</span></p>
+                            <p>Phone Number : <span>+91-{selectedDress.mobileNum}</span></p>
                         </div>
                         <div className={style.customer_name_and_mobile_number}>
-                            <p>Address : <span>123 Sector 23 Chandigarh</span></p>
+                            <p>Address : <span>{selectedDress.address}</span></p>
                         </div>
                         <div className={style.customer_name_and_mobile_number}>
-                            <p>Amount : <span>₹ {selectedDress.Price}</span></p>
-                            <p>Measurements : <span>C-12</span></p>
+                            <p>Amount : <span>₹ {selectedDress.amount}</span></p>
+                            <p>Measurements : <span>{selectedDress.measures}</span></p>
                         </div>
                     </div>
                 </div>

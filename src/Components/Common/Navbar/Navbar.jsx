@@ -5,8 +5,9 @@ import style from '../../../Components/Component.module.css';
 import LogIn from '../../LogIn/LogIn';
 import { useCart } from '../../Context/Context';
 import "./Navbar.css";
+
 function Navbar() {
-  const { isLogIn } = useCart();
+  const { isLogIn, setIsLogIn } = useCart();
   const location = useLocation();
   const [openLoginPage, setOpenLoginPage] = useState(false);
   const [userMenuClick, setUserMenuClick] = useState(false);
@@ -21,15 +22,17 @@ function Navbar() {
     setOpenLoginPage(false);
   }
   const customStyles = {
+    overlay: {
+      backgroundColor: 'transparent', // Makes the overlay background transparent
+    },
     content: {
       position: "fixed",
       top: "250px",
-      right: "-150px",
+      right: "-130px",
       left: "auto",
       bottom: "auto",
+      padding:"0",
       transform: "translate(-50%, -50%)",
-      // boxShadow: "0 0 10px 10px rgb(38,38,38,0.5)",
-      // border: "none",
       borderRadius: "20px",
       backgroundColor: "#fff"
     },
@@ -77,23 +80,25 @@ function Navbar() {
           </div>
         </Link>
         <Link to="address" onClick={closeUserIcon}>
-        <div className='previous_order_icon_and_text'>
-          <div className="previous_order_icon">
-            <img src='/SavedAddress.svg' alt='Saved Address' />
+          <div className='previous_order_icon_and_text'>
+            <div className="previous_order_icon">
+              <img src='/SavedAddress.svg' alt='Saved Address' />
+            </div>
+            <div className="previous_order_text">
+              <h4>Saved Address</h4>
+            </div>
           </div>
-          <div className="previous_order_text">
-            <h4>Saved Address</h4>
-          </div>
-        </div>
         </Link>
-        <div className='previous_order_icon_and_text'>
-          <div className="previous_order_icon">
-            <img src='/LogOut_Icon.svg' alt='Log Out' />
+        <Link to="/" onClick={() => {setIsLogIn(false);closeUserIcon()}}>
+          <div className='previous_order_icon_and_text'>
+            <div className="previous_order_icon">
+              <img src='/LogOut_Icon.svg' alt='Log Out' />
+            </div>
+            <div className="previous_order_text">
+              <h4>Log Out </h4>
+            </div>
           </div>
-          <div className="previous_order_text">
-            <h4>Log Out </h4>
-          </div>
-        </div>
+        </Link>
       </Model>
     }
   </>

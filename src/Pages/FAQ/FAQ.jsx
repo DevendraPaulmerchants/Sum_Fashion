@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import style from "../../Components/Component.module.css";
-import { IoIosArrowForward,IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 const questionAndAnswer = [
     {
         Id: 1,
@@ -20,31 +20,93 @@ const questionAndAnswer = [
 ];
 function FAQ() {
     const [selectedId, setSelectedId] = useState();
+    const [faqCategory, setFaqCategory] = useState(null);
+    const [faqCategoryId, setFaqCategoryId] = useState(null);
+    const [faqIssues, setFaqIssues] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingIssues, setIsLoadingIssues] = useState(false);
+    useEffect(() => {
+        setIsLoading(true);
+        fetch("https://www.sumfashion.in/api/app/v1/faqs/categories", {
+            headers: {
+                // 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            method: 'GET',
+            mode: 'cors',
+        }).then((res) => res.json())
+            .then((data) => {
+                // console.log(data.response);
+                setFaqCategory(data.response);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                alert(err);
+                setIsLoading(false);
+            })
+    }, []);
+    // Issues on the basis of Selected category ----------------
+    useEffect(() => {
+        setIsLoadingIssues(true);
+        fetch(`https://www.sumfashion.in/api/app/v1/faqs/issues/${faqCategoryId}`, {
+            headers: {
+                // 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            method: 'GET',
+            mode: 'cors',
+        }).then((res) => res.json())
+            .then((data) => {
+                // console.log(data.response);
+                setFaqIssues(data.response);
+                setIsLoadingIssues(false);
+            })
+            .catch((err) => {
+                alert(err);
+                setIsLoadingIssues(false);
+            })
+    }, [faqCategoryId]);
+
     const handleSelectedId = (Id) => {
-        setSelectedId(Id);
-        if (selectedId === Id) {
+        setSelectedId(Id - 1);
+        setFaqCategoryId(Id);
+        if (selectedId === Id - 1) {
             setSelectedId();
         }
     };
     return (
         <div className={style.faq_container}>
-            {questionAndAnswer?.map((ques, id) => {
-                return (
-                    <div className={style.faq_questions_container}>
-                        <h2 onClick={() => handleSelectedId(ques.Id)}>
-                            {ques.Ques}
-                            {selectedId === id + 1 ? (
-                                <span><IoIosArrowDown/></span>
-                            ) : (
-                                <span><IoIosArrowForward/></span>
-                            )}
-                        </h2>
-                        <p className={selectedId === id + 1 ? style.show : style.hidden}>
-                            {ques.Ans}
-                        </p>
-                    </div>
-                );
-            })}
+            {isLoading ? <div className={style.loader_container}><div className={style.loader}></div></div> :
+                <>
+                    {faqCategory?.map((val, id) => {
+                        return (
+                            <div className={style.faq_questions_container} key={val.id}>
+                                <h2 onClick={() => handleSelectedId(val.id)}>
+                                    {val.title}
+                                    {selectedId === id + 1 ? (
+                                        <span><IoIosArrowDown /></span>
+                                    ) : (
+                                        <span><IoIosArrowForward /></span>
+                                    )}
+                                </h2>
+                                {/* <br/> */}
+                                <div className={selectedId === id + 1 ? style.show : style.hidden}>
+                                    {isLoadingIssues ? <div className={style.loader_container}><div className={style.loader}></div></div> :
+                                        <>
+                                            {faqIssues?.map((Issues, id) => {
+                                                return <div>
+                                                    <h3 className={style.question_h3}><b>Q.</b>{id + 1} {Issues?.question}</h3>
+                                                    <p><b>Ans:</b> {Issues?.answer}</p>
+                                                </div>
+                                            })}
+                                        </>
+                                    }
+                                </div>
+                            </div>
+                        );
+                    })}
+                </>
+            }
         </div>
     )
 }

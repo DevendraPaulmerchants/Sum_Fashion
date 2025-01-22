@@ -22,3 +22,8 @@
 .women_card_container_parent {
     padding: 2rem 0;
 }
+@media screen and (max-width:1200px){
+  .women_fashion_parent {
+    padding: 1rem;
+  }
+}
