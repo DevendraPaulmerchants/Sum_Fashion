@@ -57,14 +57,14 @@ import { useCart } from '../../Context/Context';
 function NewArrival() {
     const { isLoading, dress } = useCart();
     const [state, setState] = useState(1);
-    const [itemsToShow, setItemsToShow] = useState(4); 
+    const [itemsToShow, setItemsToShow] = useState(4);
 
     useEffect(() => {
         const updateItemsToShow = () => {
-            if (window.innerWidth < 1200) {
+            if (window.innerWidth < 1024) {
                 setItemsToShow(3);
             }
-            if(window.innerWidth < 767){
+            if (window.innerWidth < 767) {
                 setItemsToShow(1);
             }
         };
@@ -75,7 +75,7 @@ function NewArrival() {
         return () => {
             window.removeEventListener('resize', updateItemsToShow);
         };
-    }, []);
+    }, [window.innerWidth]);
 
     return (
         <>
@@ -125,7 +125,7 @@ function NewArrival() {
             </div>
             <div className={style.women_card_container_parent}>
                 {isLoading ? (
-                    <div className={style.loader}></div>
+                    <div className={style.loader_container}><div className={style.loader}></div></div>
                 ) : (
                     <>
                         {state === 1 && <WomenFashionCard cardContent={dress?.slice(0, itemsToShow)} />}

@@ -2,26 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import style from '../../../Components/Component.module.css';
 
-const bannerList=[
-    {
-        name:"devendra"
-    },
-    {
-        name:"devendra"
-    },
-    {
-        name:"devendra"
-    },
-    {
-        name:"devendra"
-    },
-]
 function HomeHeroSection() {
-    const [position, setPosition] = useState(1);
+    const [position, setPosition] = useState(0);
     const [banners, setBanners] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const next = () => {
-        if (position < bannerList.length - 1) {
+        console.log("next button click")
+        if (position < banners?.length - 1) {
             setPosition(position + 1)
         }
         else {
@@ -33,7 +20,7 @@ function HomeHeroSection() {
             setPosition(position - 1)
         }
         else {
-            setPosition(bannerList.length - 1)
+            setPosition(banners?.length - 1)
         }
     }
     useEffect(() => {
@@ -48,7 +35,6 @@ function HomeHeroSection() {
         }).then((res) => res.json())
             .then((data) => {
                 setBanners(data.response);
-                console.log(data.response);
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -58,10 +44,10 @@ function HomeHeroSection() {
     }, [])
 
     return <>
-        {isLoading ? <div className={style.loader}></div> :
+        {isLoading ? <div className={style.loader_container}><div className={style.loader}></div></div> :
             <div className={style.hero_section_parent}>
                 <div className={style.overlay}></div>
-                <div><IoIosArrowBack className={style.hero_section_back_forward_arrow} onClick={back} /></div>
+                <div className={style.hero_section_forward_btn}><IoIosArrowBack className={style.hero_section_back_forward_arrow} onClick={back} /></div>
 
                 <div className={style.hero_section_title_img}>
                     <div className={style.hero_section_left_container}>
@@ -75,7 +61,7 @@ function HomeHeroSection() {
                         <img src={banners?.[position]?.imageUrl} alt={banners?.[position]?.title} />
                     </div>
                 </div>
-                <div><IoIosArrowForward className={style.hero_section_back_forward_arrow} onClick={next} /></div>
+                <div className={style.hero_section_forward_btn}><IoIosArrowForward className={style.hero_section_back_forward_arrow} onClick={next} /></div>
             </div>
         }
     </>

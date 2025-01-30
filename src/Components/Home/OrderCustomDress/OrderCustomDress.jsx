@@ -27,7 +27,7 @@ function OrderCustomDress() {
                     onClick={handleCustomDress}
                 >Order Custom Dress</button>
             </div>
-            <div>
+            <div className={style.scissors_image}>
                 <img src='scissors.svg' alt='Scissors' />
             </div>
         </div>

@@ -5,7 +5,7 @@
 .footer_logo_and_links {
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 10px;
 }
 .footer_logo_container {
     width: 150px;
@@ -36,5 +36,25 @@
 @media screen and (max-width:1200px){
     .footer_parent {
         padding: 1rem;
+    }
+}
+@media screen and (min-width:300px) and (max-width:767px) {
+    .footer_parent {
+        margin: 1rem;
+    }
+    .footer_links_container {
+        gap: 10px;
+    }
+    .footer_links_container a {
+        font-size: 12px;
+        max-width: 50px;
+        max-height: 17px;
+        overflow: hidden;
+    }
+    .footer_logo_container {
+        width: 100px;
+    }
+    .footer_copyright_container p {
+       font-size: 12px;
     }
 }

@@ -4,6 +4,8 @@ import Model from "react-modal";
 import style from '../../../Components/Component.module.css';
 import LogIn from '../../LogIn/LogIn';
 import { useCart } from '../../Context/Context';
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMdClose } from "react-icons/io";
 import "./Navbar.css";
 
 function Navbar() {
@@ -11,6 +13,10 @@ function Navbar() {
   const location = useLocation();
   const [openLoginPage, setOpenLoginPage] = useState(false);
   const [userMenuClick, setUserMenuClick] = useState(false);
+  const [isClickBurgurIcon,setIsClickBurgurIcon]=useState(false);
+  const clickBurgurIcon=()=>{
+    setIsClickBurgurIcon(!isClickBurgurIcon);
+  }
   const openUserIcon = () => {
     setUserMenuClick(true);
   }
@@ -23,7 +29,7 @@ function Navbar() {
   }
   const customStyles = {
     overlay: {
-      backgroundColor: 'transparent', // Makes the overlay background transparent
+      backgroundColor: 'transparent',
     },
     content: {
       position: "fixed",
@@ -31,7 +37,7 @@ function Navbar() {
       right: "-130px",
       left: "auto",
       bottom: "auto",
-      padding:"0",
+      padding: "0",
       transform: "translate(-50%, -50%)",
       borderRadius: "20px",
       backgroundColor: "#fff"
@@ -47,9 +53,27 @@ function Navbar() {
         <Link to="/women-fashion" className={location.pathname === '/women-fashion' ? `${style.list_active}` : ""} >Women Fashion</Link>
         <Link to='/mens-fashion' className={location.pathname === '/mens-fashion' ? `${style.list_active}` : ""} >Men Fashion</Link>
         <Link to="/accessories" className={location.pathname === '/accessories' ? `${style.list_active}` : ""} >Accessories</Link>
+        <div className={style.navbar_btn}>
+          {isLogIn ? <button id='user_icon' onClick={openUserIcon}><img src='/UserIcon.svg' alt='User Icon' height={30} /></button> : <button onClick={() => setOpenLoginPage(true)}>Log In</button>}
+        </div>
       </div>
-      <div className={style.navbar_btn}>
+      {/* <div className={style.navbar_btn}>
         {isLogIn ? <button id='user_icon' onClick={openUserIcon}><img src='/UserIcon.svg' alt='User Icon' height={30} /></button> : <button onClick={() => setOpenLoginPage(true)}>Log In</button>}
+      </div> */}
+    </div>
+    <div className='mobile-navbar-parent'>
+      <div className='mobile-navbar-burgur-and-logo'>
+        {!isClickBurgurIcon ? <RxHamburgerMenu fontSize={40} onClick={clickBurgurIcon} /> : <IoMdClose fontSize={40} onClick={clickBurgurIcon} />}
+        <Link to='/'><img src='/Sum_fashion_logo.svg' alt='Sum Fashion' /></Link>
+      </div>
+      <div className={isClickBurgurIcon ? 'mobile-navbar-list' :'display-none'}>
+        <Link to="/" className={location.pathname === '/' ? `${style.list_active}` : ""} >Home</Link>
+        <Link to="/women-fashion" className={location.pathname === '/women-fashion' ? `${style.list_active}` : ""} >Women Fashion</Link>
+        <Link to='/mens-fashion' className={location.pathname === '/mens-fashion' ? `${style.list_active}` : ""} >Men Fashion</Link>
+        <Link to="/accessories" className={location.pathname === '/accessories' ? `${style.list_active}` : ""} >Accessories</Link>
+        <div className={style.navbar_btn}>
+          {isLogIn ? <button id='user_icon' onClick={openUserIcon}><img src='/UserIcon.svg' alt='User Icon' height={30} /></button> : <button onClick={() => setOpenLoginPage(true)}>Log In</button>}
+        </div>
       </div>
     </div>
     {openLoginPage && <LogIn close={closeLoginPage} />}
@@ -89,7 +113,7 @@ function Navbar() {
             </div>
           </div>
         </Link>
-        <Link to="/" onClick={() => {setIsLogIn(false);closeUserIcon()}}>
+        <Link to="/" onClick={() => { setIsLogIn(false); closeUserIcon() }}>
           <div className='previous_order_icon_and_text'>
             <div className="previous_order_icon">
               <img src='/LogOut_Icon.svg' alt='Log Out' />

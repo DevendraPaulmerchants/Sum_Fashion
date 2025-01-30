@@ -36,3 +36,39 @@
 a {
     text-decoration: none;
 }
+.mobile-navbar-parent {
+    display: none;
+}
+@media screen and (min-width:300px) and (max-width:767px){
+    .mobile-navbar-parent {
+        display: block;
+        position: relative;
+    }
+    .mobile-navbar-burgur-and-logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 1.5rem;
+    }
+    .mobile-navbar-burgur-and-logo img {
+        height: 50px;
+        width: 150px;
+    }
+    .mobile-navbar-list a {
+        display: block;
+        color: #2D2D2D;
+        padding: 5px 0;
+        font-size: 24px;
+    }
+    .mobile-navbar-list {
+        width: 200px;
+        background: #FFF;
+        height: 100vh;
+        padding: 0 1.5rem;
+        position: absolute;
+        z-index: 99;
+    }
+    .mobile-navbar-list button {
+        margin-top: 1rem;
+    }
+}

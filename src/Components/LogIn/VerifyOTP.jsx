@@ -5,23 +5,40 @@ import "./VerifyOtp.css";
 import OtpInput from "react-otp-input";
 import { useCart } from '../Context/Context';
 
-function VerifyOTP({ closeOtp,mobileNumber }) {
-    const {setIsLogIn}=useCart();
+function VerifyOTP({ closeOtp, mobileNumber }) {
+    const { setIsLogIn } = useCart();
     const [otp, setOTP] = useState("");
-    useEffect(()=>{
-        const VOTP=document.querySelector("#react_otp");
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const VOTP = document.querySelector("#react_otp");
         VOTP.focus();
-    },[])
-    const handleOTP=(e)=>{
+    }, [])
+    const handleOTP = (e) => {
         e.preventDefault();
-        if(otp === "8888"){
-            alert("OTP matched");
-            setIsLogIn(true);
-            closeOtp();
-        }
-        else {
-            alert("OTP did not match");
-        }
+        setIsLoading(true)
+        fetch("https://www.sumfashion.in/api/app/v1/sms/new/verifyOtp", {
+            headers: {
+                // 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                phone_number: mobileNumber,
+                otp_code: otp
+            })
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(data.response);
+                setIsLoading(false);
+                setIsLogIn(true);
+                closeOtp();
+            })
+            .catch((err) => {
+                alert(err);
+                setIsLoading(false);
+            })
     }
 
     return (
@@ -34,7 +51,7 @@ function VerifyOTP({ closeOtp,mobileNumber }) {
                 <div className={style.login_page_left_and_right_container}>
                     <div className={style.login_page_left_container}>
                         <p>Find your favorite style and get it custom tailored</p>
-                        <form onSubmit={(e)=>{handleOTP(e)}}>
+                        <form onSubmit={(e) => { handleOTP(e) }}>
                             <label>Enter OTP</label>
                             <p style={{ fontSize: '14px', marginBottom: '15px' }}>Please enter OTP sent on +91 {mobileNumber} for login.</p>
                             <div className={style.verify_otp_input_container}>
@@ -42,14 +59,14 @@ function VerifyOTP({ closeOtp,mobileNumber }) {
                                     id="react_otp"
                                     value={otp}
                                     onChange={setOTP}
-                                    numInputs={4}
+                                    numInputs={6}
                                     inputType="tel"
                                     skipDefaultStyles="true"
                                     renderSeparator={<span>&nbsp;&nbsp;</span>}
                                     renderInput={(props) => <input {...props} id="react_otp" required />}
                                 />
                             </div>
-                            <button className={style.login_page_btn}>Submit</button>
+                            {isLoading ? <div className={style.loader_container}><div className={style.loader}></div></div> : <button className={style.login_page_btn}>Submit</button>}
                         </form>
                     </div>
                     <div className={style.login_page_right_container}>
